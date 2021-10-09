@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JACKBOX 1 YEAR</title>
+        <meta name="description" content="fuck">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <!-- Authors -->
+        <link type="text/plain" rel="author" href="humans.txt" />
+
+        <!-- Fav & Touch Icon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/siteimgs/favicon.ico">
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    </head>
+
+    <script src="/jquery-2.1.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io-stream.js"></script>
+
+    <!-- feb 20 notes - next up
+
+    // add in 128 divs with the same css hidden class as the columns
+    // copy the same toggleClass("hidden") from the main.js
+    // use a listen (socket.on) for the position variable and update accordingly -->
+
+    <body ontouchstart="" onmouseover="">
+
+        <div id="information">
+          <div id="logo">
+
+            <li>JACKBOX ANNIVERSARY</li>
+
+          </div>
+          <div id="vs">
+            <img src="/siteimgs/vs.png">
+          </div>
+          <h5 class="seed"><span></span></h5>
+          <li class="round">match <span>1</span></li>
+          <li class="total">votes <span>0</span></li>
+        </div>
+        <div id="wrapper" class="hidden">
+            <ul id="admin">
+                <li class="graph"><a href="#"><i class="fa fa-area-chart"></i></a></li>
+                <li class="reset"><a href="#"><i class="fa fa-refresh"></i></a></li>
+                <li class="back"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
+                <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
+                <li id="load" class="load"><a href="#"><i class="fa fa-floppy-o"></i></a></li>
+                <input id="input" class="load" type="text" placeholder="LOAD" autocomplete="off">
+            </ul>
+
+            <div class="total"></div>
+
+            <!-- BIG CHINGUS INCOMING -->
+            <!-- ⠀        ⣧⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣧⠀⠀⠀⢰⡿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡟⡆⠀⠀⣿⡇⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⣿⠀⢰⣿⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡄⢸⠀⢸⣿⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⢸⡄⠸⣿⡇⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⢸⡅⠀⣿⢠⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣥⣾⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⡿⡿⣿⣿⡿⡅⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠉⠀⠉⡙⢔⠛⣟⢋⠦⢵⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣄⠀⠀⠁⣿⣯⡥⠃⠀⢳⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡇⠀⠀⠀⠐⠠⠊⢀⠀⢸⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⡿⠀⠀⠀⠀⠀⠈⠁⠀⠀⠘⣿⣄⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⡀⠀⠀⠀
+            ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣧⠀⠀
+            ⠀⠀⠀⡜⣭⠤⢍⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢛⢭⣗⠀
+            ⠀⠀⠀⠁⠈⠀⠀⣀⠝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠠⠀⠀⠰⡅
+            ⠀⠀⠀⢀⠀⠀⡀⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠔⠠⡕⠀
+            ⠀⠀⠀⠀⣿⣷⣶⠒⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠘⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠈⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠊⠉⢆⠀⠀⠀⠀
+            ⠀⢀⠤⠀⠀⢤⣤⣽⣿⣿⣦⣀⢀⡠⢤⡤⠄⠀⠒⠀⠁⠀⠀⠀⢘⠔⠀⠀⠀⠀
+            ⠀⠀⠀⡐⠈⠁⠈⠛⣛⠿⠟⠑⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠉⠑⠒⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀-->
+            <!-- feb28 notes: we should try to use one li class and use ToggleClass to change it to different integers !-->
+
+            <div class="column red" data-color="red">
+                <a href="#">
+
+            <img id="imgDispL" src="/images/img (0).png" onerror="this.src='/siteimgs/will.png'">
+
+
+
+                    <span></span>
+                </a>
+            </div>
+
+          <div class="column green" data-color="green">
+                <a href="#">
+
+            <img id="imgDispR" src="/images/img (1).png" onerror="this.src='/siteimgs/winner.png'">
+
+                    <span></span>
+                </a>
+            </div>
+
+            <div id='lightbox' class='lightbox'>
+                <img id='borat' src='siteimgs/borat.gif'>
+            </div>
+
+            <div id='lightbox2' class='lightbox2'>
+                <img id='start' src='siteimgs/start.gif'>
+
+            </div>
+
+        </div>
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="js/fastclick.js"></script>
+        <script src="js/howler.js"></script>
+        <script src="js/client.js"></script>
+    </body>
+</html>
