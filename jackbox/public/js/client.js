@@ -80,7 +80,7 @@ var newVote = function(data) {
     recalculateWidth();
 }
 
-//mar18 why the fuck was this so easy
+//mar18 why was this so easy
 
 function changeImageL(imgName) {
   image = document.getElementById('imgDispL');
@@ -124,7 +124,7 @@ $("#admin .back").click(function(data) {
   });
 
 
-//mar13 what the fuck is this for??? probably nothing
+//mar13 what is this for??? probably nothing
 $("#admin .next").click(function(e) {
     e.preventDefault();
 
@@ -156,9 +156,9 @@ $(".column a").click(function(e) {
     console.log(voteColor);
 });
 
-//mar6 we fuckin did it
-//mar18 no we fuckin didn't lol (50000ms load time with all 510 images)
-//mar18 sike i fixed it fuck you big chungus
+//mar6 we did it
+//mar18 no we didn't lol (50000ms load time with all 510 images)
+//mar18 sike i fixed it
 
 socket.on('current round', function(value)
 {
